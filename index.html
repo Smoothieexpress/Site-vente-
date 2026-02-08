@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Délices de Belgique - Gaufres, Pancakes & Crêpes</title>
+    <title>Délices Gourmands - Gaufres, Pancakes & Crêpes à Cotonou</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
     <style>
@@ -119,10 +119,271 @@
             color: var(--primary);
         }
 
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            padding: 8px 15px 8px 35px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 14px;
+            width: 200px;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            width: 250px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary);
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .mobile-menu-btn {
             display: none;
             font-size: 24px;
             cursor: pointer;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1100;
+            transition: var(--transition);
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-header h3 {
+            font-size: 22px;
+            color: var(--dark);
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+            transition: var(--transition);
+        }
+
+        .close-cart:hover {
+            color: var(--secondary);
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 8px;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-color: #f5f5f5;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .quantity-value {
+            margin: 0 10px;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .remove-item {
+            margin-left: 15px;
+            color: var(--secondary);
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 20px 0;
+            border-top: 2px solid #eee;
+            margin-top: 10px;
+        }
+
+        .cart-empty {
+            text-align: center;
+            padding: 40px 0;
+            color: #999;
+        }
+
+        .cart-empty i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .cart-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 154, 60, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+            transform: translateY(-3px);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Hero Section */
@@ -166,40 +427,6 @@
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 14px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--secondary);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.2);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(255, 154, 60, 0.1);
-            transform: translateY(-3px);
         }
 
         .hero-image {
@@ -311,29 +538,50 @@
             font-size: 15px;
         }
 
-        .product-price {
+        .product-controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-top: 20px;
         }
 
-        .price {
+        .product-price {
             font-weight: 700;
             font-size: 20px;
             color: var(--primary);
         }
 
+        .product-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-quantity label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .product-quantity select {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: white;
+        }
+
         .add-to-cart {
             background-color: var(--light);
             color: var(--primary);
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: var(--transition);
+            border: none;
+            font-size: 18px;
         }
 
         .add-to-cart:hover {
@@ -589,39 +837,98 @@
             transform: translateY(-5px);
         }
 
-        .newsletter-form {
-            display: flex;
-            margin-top: 20px;
-        }
-
-        .newsletter-form input {
-            flex: 1;
-            padding: 15px;
-            border: none;
-            border-radius: 50px 0 0 50px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .newsletter-form button {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 0 50px 50px 0;
-            padding: 0 25px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .newsletter-form button:hover {
-            background-color: var(--secondary);
-        }
-
         .copyright {
             text-align: center;
             padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #bbb;
             font-size: 14px;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            z-index: 1200;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Product Search Results */
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-height: 400px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .search-result-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #f5f5f5;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .search-result-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .search-result-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .search-result-info h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .search-result-info p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .no-results {
+            padding: 20px;
+            text-align: center;
+            color: #999;
         }
 
         /* Responsive Styles */
@@ -638,6 +945,15 @@
             
             .section-title h2 {
                 font-size: 32px;
+            }
+            
+            .cart-modal {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .cart-modal.active {
+                right: 0;
             }
         }
 
@@ -662,6 +978,10 @@
                 display: block;
             }
             
+            .search-container {
+                display: none;
+            }
+            
             .hero {
                 padding: 150px 0 80px;
             }
@@ -672,6 +992,17 @@
             
             section {
                 padding: 80px 0;
+            }
+            
+            .product-controls {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .product-quantity {
+                width: 100%;
+                justify-content: space-between;
             }
         }
 
@@ -688,14 +1019,16 @@
                 flex-direction: column;
             }
             
-            .newsletter-form {
-                flex-direction: column;
+            .cart-modal {
+                padding: 20px;
             }
             
-            .newsletter-form input,
-            .newsletter-form button {
-                width: 100%;
-                border-radius: 50px;
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .cart-item-img {
                 margin-bottom: 10px;
             }
         }
@@ -708,7 +1041,7 @@
             <div class="nav-container">
                 <div class="logo">
                     <i class="fas fa-waffle"></i>
-                    <span>Délices de Belgique</span>
+                    <span>Délices Gourmands</span>
                 </div>
                 
                 <div class="mobile-menu-btn">
@@ -724,12 +1057,57 @@
                 </nav>
                 
                 <div class="nav-actions">
-                    <i class="fas fa-search"></i>
-                    <i class="fas fa-shopping-cart"></i>
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Rechercher un produit...">
+                        <i class="fas fa-search search-icon"></i>
+                        <div class="search-results"></div>
+                    </div>
+                    
+                    <div class="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal">
+        <div class="cart-header">
+            <h3>Votre Panier</h3>
+            <button class="close-cart"><i class="fas fa-times"></i></button>
+        </div>
+        
+        <div class="cart-items">
+            <!-- Les produits du panier seront ajoutés ici dynamiquement -->
+        </div>
+        
+        <div class="cart-empty">
+            <i class="fas fa-shopping-basket"></i>
+            <p>Votre panier est vide</p>
+        </div>
+        
+        <div class="cart-total" style="display: none;">
+            <span>Total:</span>
+            <span class="total-amount">0 FCFA</span>
+        </div>
+        
+        <div class="cart-actions" style="display: none;">
+            <button class="btn btn-whatsapp" id="checkout-whatsapp">
+                <i class="fab fa-whatsapp"></i> Commander via WhatsApp
+            </button>
+            <button class="btn btn-secondary" id="clear-cart">Vider le panier</button>
+        </div>
+    </div>
+    
+    <div class="overlay"></div>
+
+    <!-- Notification -->
+    <div class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Produit ajouté au panier !</span>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -737,7 +1115,7 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Dégustez nos <span>délices sucrés</span> faits avec amour</h1>
-                    <p>Découvrez nos gaufres belges authentiques, pancakes moelleux, crêpes légères et mini-gâteaux gourmands. Tous nos produits sont préparés artisanalement avec des ingrédients de qualité.</p>
+                    <p>Découvrez nos gaufres croustillantes, pancakes moelleux, crêpes légères et mini-gâteaux gourmands. Tous nos produits sont préparés artisanalement à Cotonou avec des ingrédients de qualité.</p>
                     <div class="hero-buttons">
                         <a href="#products" class="btn btn-primary">Voir nos produits</a>
                         <a href="#contact" class="btn btn-secondary">Nous contacter</a>
@@ -759,73 +1137,7 @@
             </div>
             
             <div class="products-grid">
-                <!-- Product 1 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" alt="Gaufres belges">
-                    </div>
-                    <div class="product-info">
-                        <h3>Gaufres Belges</h3>
-                        <p>Gaufres croustillantes à l'extérieur et moelleuses à l'intérieur, préparées selon la recette traditionnelle belge.</p>
-                        <div class="product-price">
-                            <span class="price">4,50€</span>
-                            <div class="add-to-cart">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 2 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Pancakes">
-                    </div>
-                    <div class="product-info">
-                        <h3>Pancakes Moelleux</h3>
-                        <p>Pancakes légers et moelleux servis avec sirop d'érable, fruits frais et chantilly maison.</p>
-                        <div class="product-price">
-                            <span class="price">5,20€</span>
-                            <div class="add-to-cart">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 3 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Crêpes">
-                    </div>
-                    <div class="product-info">
-                        <h3>Crêpes Fines</h3>
-                        <p>Crêpes légères et délicates, garnies selon vos envies : Nutella, sucre, confiture ou fruits frais.</p>
-                        <div class="product-price">
-                            <span class="price">3,80€</span>
-                            <div class="add-to-cart">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Product 4 -->
-                <div class="product-card">
-                    <div class="product-img">
-                        <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Mini-gâteaux">
-                    </div>
-                    <div class="product-info">
-                        <h3>Mini-Gâteaux</h3>
-                        <p>Assortiment de mini-gâteaux gourmands : cheesecake, forêt noire, tarte au citron et carrot cake.</p>
-                        <div class="product-price">
-                            <span class="price">2,90€ pièce</span>
-                            <div class="add-to-cart">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Les produits seront ajoutés dynamiquement -->
             </div>
         </div>
     </section>
@@ -860,13 +1172,13 @@
         <div class="container">
             <div class="section-title">
                 <h2>Notre Histoire</h2>
-                <p>Une passion pour les délices sucrés depuis plus de 20 ans</p>
+                <p>Une passion pour les délices sucrés à Cotonou</p>
             </div>
             
             <div class="about-content">
                 <div class="about-text">
-                    <p>Fondé en 2002, Délices de Belgique est né de la passion d'une famille pour les desserts traditionnels. Notre mission est de partager l'authenticité des gaufres belges, la légèreté des pancakes américains et la finesse des crêpes bretonnes.</p>
-                    <p>Tous nos produits sont préparés sur place avec des ingrédients soigneusement sélectionnés. Nous privilégions les produits locaux et de saison pour garantir fraîcheur et qualité à chacune de nos créations.</p>
+                    <p>Délices Gourmands est né en 2020 de la passion d'Esther pour la pâtisserie et les desserts traditionnels. Après avoir perfectionné ses recettes familiales, elle a décidé de partager ses talents avec les habitants de Cotonou.</p>
+                    <p>Notre mission est de vous offrir des moments de douceur avec nos gaufres croustillantes, pancakes moelleux, crêpes fines et mini-gâteaux gourmands. Tous nos produits sont préparés sur place avec des ingrédients soigneusement sélectionnés pour garantir fraîcheur et qualité.</p>
                     
                     <div class="features">
                         <div class="feature">
@@ -875,7 +1187,7 @@
                             </div>
                             <div>
                                 <h3>Ingrédients Frais</h3>
-                                <p>Produits locaux et de saison</p>
+                                <p>Produits locaux et de qualité</p>
                             </div>
                         </div>
                         
@@ -891,11 +1203,11 @@
                         
                         <div class="feature">
                             <div class="feature-icon">
-                                <i class="fas fa-award"></i>
+                                <i class="fas fa-bolt"></i>
                             </div>
                             <div>
-                                <h3>Qualité Premium</h3>
-                                <p>Recettes traditionnelles revisitées</p>
+                                <h3>Livraison Rapide</h3>
+                                <p>À Cotonou et ses environs</p>
                             </div>
                         </div>
                     </div>
@@ -924,7 +1236,7 @@
                         </div>
                         <div>
                             <h3>Notre Adresse</h3>
-                            <p>12 Rue de la Gourmandise<br>75008 Paris, France</p>
+                            <p>Rue du Commerce, Akpakpa<br>Cotonou, Bénin</p>
                         </div>
                     </div>
                     
@@ -944,26 +1256,26 @@
                         </div>
                         <div>
                             <h3>Téléphone</h3>
-                            <p>01 23 45 67 89</p>
+                            <p>+229 61 23 45 67</p>
                         </div>
                     </div>
                     
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/22961234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 
                 <div class="contact-form">
+                    <h3>Demande d'information</h3>
                     <form id="contactForm">
                         <div class="form-group">
                             <input type="text" placeholder="Votre nom" required>
                         </div>
                         
                         <div class="form-group">
-                            <input type="email" placeholder="Votre email" required>
+                            <input type="tel" placeholder="Votre numéro de téléphone" required>
                         </div>
                         
                         <div class="form-group">
@@ -982,8 +1294,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-about">
-                    <a href="#" class="footer-logo">Délices de Belgique</a>
-                    <p>Spécialistes des gaufres, pancakes, crêpes et mini-gâteaux depuis 2002. Nous préparons chaque jour des délices sucrés avec passion et des ingrédients de qualité.</p>
+                    <a href="#" class="footer-logo">Délices Gourmands</a>
+                    <p>Spécialistes des gaufres, pancakes, crêpes et mini-gâteaux à Cotonou. Nous préparons chaque jour des délices sucrés avec passion et des ingrédients de qualité.</p>
                 </div>
                 
                 <div class="footer-links">
@@ -1008,23 +1320,446 @@
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 Délices de Belgique. Tous droits réservés.</p>
+                <p>&copy; 2023 Délices Gourmands Cotonou. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // Données des produits
+        const products = [
+            {
+                id: 1,
+                name: "Gaufres Belges",
+                description: "Gaufres croustillantes à l'extérieur et moelleuses à l'intérieur, préparées selon la recette traditionnelle.",
+                price: 1500,
+                image: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80",
+                category: "gaufres"
+            },
+            {
+                id: 2,
+                name: "Pancakes Moelleux",
+                description: "Pancakes légers et moelleux servis avec sirop d'érable, fruits frais et chantilly maison.",
+                price: 1800,
+                image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                category: "pancakes"
+            },
+            {
+                id: 3,
+                name: "Crêpes Fines",
+                description: "Crêpes légères et délicates, garnies selon vos envies : Nutella, sucre, confiture ou fruits frais.",
+                price: 1200,
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                category: "crepes"
+            },
+            {
+                id: 4,
+                name: "Mini-Gâteaux",
+                description: "Assortiment de mini-gâteaux gourmands : cheesecake, forêt noire, tarte au citron et carrot cake.",
+                price: 1000,
+                image: "https://images.unsplash.com/photo-1603532648955-039310d9ed75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                category: "gateaux"
+            },
+            {
+                id: 5,
+                name: "Gaufres Liégeoises",
+                description: "Gaufres liégeoises aux perles de sucre, moelleuses et caramélisées, une spécialité belge unique.",
+                price: 1700,
+                image: "https://images.unsplash.com/photo-1562376552-0d160a2f238d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80",
+                category: "gaufres"
+            },
+            {
+                id: 6,
+                name: "Pancakes Chocolat",
+                description: "Pancakes au cacao avec pépites de chocolat, servis avec une sauce chocolat fondante.",
+                price: 2000,
+                image: "https://images.unsplash.com/photo-1528207776546-365bb710ee93?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+                category: "pancakes"
+            },
+            {
+                id: 7,
+                name: "Crêpes Suzette",
+                description: "Crêpes flambées à l'orange et au Grand Marnier, une recette raffinée et gourmande.",
+                price: 2200,
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                category: "crepes"
+            },
+            {
+                id: 8,
+                name: "Cupcakes Variés",
+                description: "Assortiment de cupcakes moelleux avec différents glaçages : vanille, chocolat, fraise et citron.",
+                price: 800,
+                image: "https://images.unsplash.com/photo-1603532648955-039310d9ed75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
+                category: "gateaux"
+            }
+        ];
+
+        // Panier
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Éléments DOM
+        const productsGrid = document.querySelector('.products-grid');
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartCount = document.querySelector('.cart-count');
+        const cartModal = document.querySelector('.cart-modal');
+        const overlay = document.querySelector('.overlay');
+        const closeCart = document.querySelector('.close-cart');
+        const cartItems = document.querySelector('.cart-items');
+        const cartEmpty = document.querySelector('.cart-empty');
+        const cartTotal = document.querySelector('.cart-total');
+        const totalAmount = document.querySelector('.total-amount');
+        const cartActions = document.querySelector('.cart-actions');
+        const clearCartBtn = document.getElementById('clear-cart');
+        const checkoutBtn = document.getElementById('checkout-whatsapp');
+        const notification = document.querySelector('.notification');
+        const searchInput = document.querySelector('.search-input');
+        const searchResults = document.querySelector('.search-results');
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const navLinks = document.querySelector('.nav-links');
-        
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartCount();
+            renderCartItems();
+            
+            // Fermer les résultats de recherche en cliquant ailleurs
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.search-container')) {
+                    searchResults.classList.remove('active');
+                }
+            });
+        });
+
+        // Afficher les produits
+        function renderProducts() {
+            productsGrid.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.setAttribute('data-id', product.id);
+                productCard.setAttribute('data-name', product.name);
+                productCard.setAttribute('data-category', product.category);
+                
+                productCard.innerHTML = `
+                    <div class="product-img">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="product-controls">
+                            <div class="product-price">${product.price.toLocaleString()} FCFA</div>
+                            <div class="product-quantity">
+                                <label for="quantity-${product.id}">Quantité:</label>
+                                <select id="quantity-${product.id}" class="product-quantity-select">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="8">8</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                            <button class="add-to-cart" data-id="${product.id}">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                productsGrid.appendChild(productCard);
+            });
+            
+            // Ajouter les événements pour les boutons "Ajouter au panier"
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+        }
+
+        // Ajouter un produit au panier
+        function addToCart(e) {
+            const productId = parseInt(e.currentTarget.getAttribute('data-id'));
+            const product = products.find(p => p.id === productId);
+            const quantitySelect = document.getElementById(`quantity-${productId}`);
+            const quantity = parseInt(quantitySelect.value);
+            
+            // Vérifier si le produit est déjà dans le panier
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: quantity
+                });
+            }
+            
+            // Mettre à jour le localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Mettre à jour l'affichage
+            updateCartCount();
+            renderCartItems();
+            
+            // Afficher la notification
+            showNotification(`${quantity} ${product.name} ajouté(s) au panier`);
+            
+            // Réinitialiser la quantité à 1
+            quantitySelect.value = "1";
+        }
+
+        // Afficher la notification
+        function showNotification(message) {
+            const notificationText = notification.querySelector('span');
+            notificationText.textContent = message;
+            
+            notification.classList.add('active');
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 3000);
+        }
+
+        // Mettre à jour le compteur du panier
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+        }
+
+        // Afficher les articles du panier
+        function renderCartItems() {
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartEmpty.style.display = 'block';
+                cartTotal.style.display = 'none';
+                cartActions.style.display = 'none';
+                return;
+            }
+            
+            cartEmpty.style.display = 'none';
+            cartTotal.style.display = 'flex';
+            cartActions.style.display = 'flex';
+            
+            let total = 0;
+            
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.setAttribute('data-id', item.id);
+                
+                cartItem.innerHTML = `
+                    <div class="cart-item-img">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <div class="cart-item-price">${item.price.toLocaleString()} FCFA</div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn minus"><i class="fas fa-minus"></i></button>
+                            <span class="quantity-value">${item.quantity}</span>
+                            <button class="quantity-btn plus"><i class="fas fa-plus"></i></button>
+                            <span class="remove-item">Supprimer</span>
+                        </div>
+                    </div>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Mettre à jour le total
+            totalAmount.textContent = `${total.toLocaleString()} FCFA`;
+            
+            // Ajouter les événements pour les boutons de quantité
+            document.querySelectorAll('.quantity-btn.minus').forEach(button => {
+                button.addEventListener('click', decreaseQuantity);
+            });
+            
+            document.querySelectorAll('.quantity-btn.plus').forEach(button => {
+                button.addEventListener('click', increaseQuantity);
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', removeItem);
+            });
+        }
+
+        // Diminuer la quantité d'un article
+        function decreaseQuantity(e) {
+            const cartItem = e.target.closest('.cart-item');
+            const itemId = parseInt(cartItem.getAttribute('data-id'));
+            const item = cart.find(item => item.id === itemId);
+            
+            if (item.quantity > 1) {
+                item.quantity--;
+            } else {
+                // Supprimer l'article si la quantité devient 0
+                cart = cart.filter(item => item.id !== itemId);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+        }
+
+        // Augmenter la quantité d'un article
+        function increaseQuantity(e) {
+            const cartItem = e.target.closest('.cart-item');
+            const itemId = parseInt(cartItem.getAttribute('data-id'));
+            const item = cart.find(item => item.id === itemId);
+            
+            item.quantity++;
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+        }
+
+        // Supprimer un article du panier
+        function removeItem(e) {
+            const cartItem = e.target.closest('.cart-item');
+            const itemId = parseInt(cartItem.getAttribute('data-id'));
+            
+            cart = cart.filter(item => item.id !== itemId);
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+            
+            showNotification("Produit supprimé du panier");
+        }
+
+        // Vider le panier
+        clearCartBtn.addEventListener('click', () => {
+            cart = [];
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            renderCartItems();
+            showNotification("Panier vidé");
+        });
+
+        // Ouvrir/fermer le panier
+        cartIcon.addEventListener('click', () => {
+            cartModal.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            cartModal.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Recherche de produits
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            
+            if (searchTerm.length === 0) {
+                searchResults.classList.remove('active');
+                return;
+            }
+            
+            const filteredProducts = products.filter(product => 
+                product.name.toLowerCase().includes(searchTerm) || 
+                product.description.toLowerCase().includes(searchTerm) ||
+                product.category.toLowerCase().includes(searchTerm)
+            );
+            
+            renderSearchResults(filteredProducts);
+            searchResults.classList.add('active');
+        });
+
+        // Afficher les résultats de recherche
+        function renderSearchResults(results) {
+            searchResults.innerHTML = '';
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = '<div class="no-results">Aucun produit trouvé</div>';
+                return;
+            }
+            
+            results.forEach(product => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                resultItem.innerHTML = `
+                    <div class="search-result-img">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="search-result-info">
+                        <h4>${product.name}</h4>
+                        <p>${product.price.toLocaleString()} FCFA</p>
+                    </div>
+                `;
+                
+                resultItem.addEventListener('click', () => {
+                    // Faire défiler jusqu'au produit
+                    const productCard = document.querySelector(`.product-card[data-id="${product.id}"]`);
+                    if (productCard) {
+                        productCard.scrollIntoView({ behavior: 'smooth' });
+                        productCard.style.boxShadow = '0 0 0 3px var(--primary)';
+                        setTimeout(() => {
+                            productCard.style.boxShadow = '';
+                        }, 2000);
+                    }
+                    
+                    // Fermer les résultats de recherche
+                    searchResults.classList.remove('active');
+                    searchInput.value = '';
+                });
+                
+                searchResults.appendChild(resultItem);
+            });
+        }
+
+        // Commander via WhatsApp
+        checkoutBtn.addEventListener('click', () => {
+            if (cart.length === 0) {
+                showNotification("Votre panier est vide");
+                return;
+            }
+            
+            let message = "Bonjour ! Je souhaite commander :%0A%0A";
+            
+            cart.forEach(item => {
+                message += `- ${item.quantity}x ${item.name} : ${(item.price * item.quantity).toLocaleString()} FCFA%0A`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `%0ATotal : ${total.toLocaleString()} FCFA%0A%0A`;
+            message += "Nom : [VOTRE NOM]%0A";
+            message += "Adresse de livraison : [VOTRE ADRESSE]%0A";
+            message += "Téléphone : [VOTRE TÉLÉPHONE]%0A%0A";
+            message += "Merci !";
+            
+            const phoneNumber = "22961234567"; // Numéro WhatsApp de votre restaurant
+            const url = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            window.open(url, '_blank');
+        });
+
+        // Menu mobile
         mobileMenuBtn.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             mobileMenuBtn.querySelector('i').classList.toggle('fa-bars');
             mobileMenuBtn.querySelector('i').classList.toggle('fa-times');
         });
-        
-        // Close mobile menu when clicking a link
+
+        // Fermer le menu mobile en cliquant sur un lien
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
@@ -1032,8 +1767,8 @@
                 mobileMenuBtn.querySelector('i').classList.remove('fa-times');
             });
         });
-        
-        // Smooth scrolling for anchor links
+
+        // Smooth scrolling pour les liens d'ancrage
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1050,45 +1785,34 @@
                 }
             });
         });
-        
-        // Form submission
+
+        // Soumission du formulaire de contact
         const contactForm = document.getElementById('contactForm');
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
+            
+            const name = this.querySelector('input[type="text"]').value;
+            const phone = this.querySelector('input[type="tel"]').value;
+            const message = this.querySelector('textarea').value;
+            
+            // Envoyer via WhatsApp
+            const whatsappMessage = `Bonjour Délices Gourmands !%0A%0AJe m'appelle ${name}.%0AMon numéro : ${phone}.%0A%0AMessage : ${message}%0A%0AMerci de me recontacter !`;
+            const url = `https://wa.me/22961234567?text=${whatsappMessage}`;
+            
+            window.open(url, '_blank');
             this.reset();
+            showNotification("Formulaire soumis avec succès !");
         });
-        
-        // Newsletter form submission
+
+        // Soumission du formulaire newsletter
         const newsletterForm = document.querySelector('.newsletter-form');
         newsletterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const emailInput = this.querySelector('input[type="email"]');
             if(emailInput.value) {
-                alert('Merci pour votre inscription à notre newsletter !');
+                showNotification("Merci pour votre inscription à notre newsletter !");
                 emailInput.value = '';
             }
-        });
-        
-        // Add to cart functionality
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function() {
-                const productCard = this.closest('.product-card');
-                const productName = productCard.querySelector('h3').textContent;
-                const productPrice = productCard.querySelector('.price').textContent;
-                
-                // Animation feedback
-                this.style.backgroundColor = '#4CAF50';
-                this.innerHTML = '<i class="fas fa-check"></i>';
-                
-                setTimeout(() => {
-                    this.style.backgroundColor = '';
-                    this.innerHTML = '<i class="fas fa-plus"></i>';
-                }, 1000);
-                
-                // Notification
-                alert(`${productName} (${productPrice}) a été ajouté à votre panier !`);
-            });
         });
     </script>
 </body>
