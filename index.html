@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Joyeux Anniversaire ma Précieuse ❤️</title>
-    <!-- Google Fonts pour une typographie romantique -->
+    <title>Joyeux Anniversaire Précieuse ❤️</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome pour les icônes (cœurs) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* (Styles identiques à avant, mais je les recopie pour que ce soit complet) */
         * {
             margin: 0;
             padding: 0;
@@ -26,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* Conteneur des cœurs flottants */
         .floating-hearts {
             position: absolute;
             top: 0;
@@ -58,7 +58,6 @@
             }
         }
 
-        /* Carte centrale */
         .container {
             position: relative;
             z-index: 5;
@@ -74,7 +73,6 @@
             border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
-        /* Photo / icône */
         .photo {
             width: 150px;
             height: 150px;
@@ -98,15 +96,6 @@
             color: #ff4d6d;
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
         }
-
-        /* Pour une vraie photo, décommente et adapte :
-        .photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-        */
 
         h1 {
             font-family: 'Dancing Script', cursive;
@@ -153,7 +142,6 @@
             box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
         }
 
-        /* Message de surprise (caché au début) */
         .surprise-message {
             margin-top: 2rem;
             font-size: 1.5rem;
@@ -165,7 +153,6 @@
             display: none;
         }
 
-        /* Canvas pour les confettis */
         #confetti-canvas {
             position: fixed;
             top: 0;
@@ -176,7 +163,6 @@
             z-index: 20;
         }
 
-        /* Responsive */
         @media (max-width: 500px) {
             .container {
                 padding: 1.5rem;
@@ -192,124 +178,119 @@
     </style>
 </head>
 <body>
-    <!-- Cœurs flottants générés par JS -->
     <div class="floating-hearts" id="hearts-container"></div>
 
-    <!-- Carte d'anniversaire -->
     <div class="container">
         <div class="photo">
-            <!-- Remplace cette icône par une photo si tu veux : <img src="ta-photo.jpg" alt="Nous"> -->
-            <i class="fas fa-heart"></i>
+            <i class="fas fa-heart"></i> <!-- Tu peux remplacer par une photo <img src="..."> -->
         </div>
-        <h1>Joyeux Anniversaire, <span id="name">Oli</span> !</h1>
+        <h1>Joyeux Anniversaire, <span id="name">Précieuse</span> !</h1>
         <p class="message">
             Pour la plus merveilleuse des personnes, je te souhaite une journée remplie de bonheur, d'amour et de surprises. <br>
-            Tu illumines ma vie chaque jour. Je t'aime énormément ! 🌹
+            Tu illumines ma vie chaque jour. Je t'aime énormément, Précieuse ! 🌹
         </p>
         <button id="surpriseBtn">🎁 Clique pour une surprise</button>
         <div id="surpriseMessage" class="surprise-message"></div>
     </div>
 
-    <!-- Canvas pour les confettis -->
     <canvas id="confetti-canvas"></canvas>
 
     <script>
-        // ---------- Cœurs flottants ----------
-        function createHearts() {
-            const container = document.getElementById('hearts-container');
-            const colors = ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff'];
-            for (let i = 0; i < 25; i++) {
-                const heart = document.createElement('i');
-                heart.classList.add('heart', 'fas', 'fa-heart');
-                // Position aléatoire
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = Math.random() * 10 + 5 + 's'; // entre 5 et 15s
-                heart.style.fontSize = Math.random() * 2 + 0.8 + 'rem';
-                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-                heart.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(heart);
-            }
-        }
-
-        // ---------- Confettis (simple et efficace) ----------
-        const canvas = document.getElementById('confetti-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-        const colors = ['#f2d74e', '#95c3fa', '#ff6f91', '#ff4d6d', '#b48cff'];
-
-        function resizeCanvas() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        function createParticle() {
-            return {
-                x: Math.random() * width,
-                y: Math.random() * height - height,
-                size: Math.random() * 8 + 4,
-                speedY: Math.random() * 3 + 2,
-                speedX: Math.random() * 2 - 1,
-                color: colors[Math.floor(Math.random() * colors.length)],
-                rotation: Math.random() * 360
-            };
-        }
-
-        function initConfetti(count = 100) {
-            particles = [];
-            for (let i = 0; i < count; i++) {
-                particles.push(createParticle());
-            }
-        }
-
-        function updateConfetti() {
-            ctx.clearRect(0, 0, width, height);
-            for (let i = 0; i < particles.length; i++) {
-                const p = particles[i];
-                ctx.save();
-                ctx.translate(p.x, p.y);
-                ctx.rotate((p.rotation * Math.PI) / 180);
-                ctx.fillStyle = p.color;
-                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-                ctx.restore();
-
-                p.y += p.speedY;
-                p.x += p.speedX;
-                p.rotation += 0.5;
-
-                if (p.y > height) {
-                    // Réinitialiser en haut
-                    p.y = -10;
-                    p.x = Math.random() * width;
-                    p.speedY = Math.random() * 3 + 2;
+        // Attendre que le DOM soit complètement chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---------- Cœurs flottants ----------
+            function createHearts() {
+                const container = document.getElementById('hearts-container');
+                const colors = ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff'];
+                for (let i = 0; i < 25; i++) {
+                    const heart = document.createElement('i');
+                    heart.classList.add('heart', 'fas', 'fa-heart');
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = Math.random() * 10 + 5 + 's';
+                    heart.style.fontSize = Math.random() * 2 + 0.8 + 'rem';
+                    heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    container.appendChild(heart);
                 }
             }
-            requestAnimationFrame(updateConfetti);
-        }
 
-        // Lancer une pluie de confettis au chargement
-        window.onload = function() {
+            // ---------- Confettis (canvas) ----------
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const colorsConfetti = ['#f2d74e', '#95c3fa', '#ff6f91', '#ff4d6d', '#b48cff'];
+
+            function resizeCanvas() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            function createParticle() {
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height - height,
+                    size: Math.random() * 8 + 4,
+                    speedY: Math.random() * 3 + 2,
+                    speedX: Math.random() * 2 - 1,
+                    color: colorsConfetti[Math.floor(Math.random() * colorsConfetti.length)],
+                    rotation: Math.random() * 360
+                };
+            }
+
+            function initConfetti(count = 100) {
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push(createParticle());
+                }
+            }
+
+            function updateConfetti() {
+                ctx.clearRect(0, 0, width, height);
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.rotation * Math.PI) / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+
+                    p.y += p.speedY;
+                    p.x += p.speedX;
+                    p.rotation += 0.5;
+
+                    if (p.y > height) {
+                        p.y = -10;
+                        p.x = Math.random() * width;
+                        p.speedY = Math.random() * 3 + 2;
+                    }
+                }
+                requestAnimationFrame(updateConfetti);
+            }
+
+            // Lancement des cœurs et des confettis au chargement
             createHearts();
             initConfetti(150);
             updateConfetti();
-        };
 
-        // Bouton surprise
-        document.getElementById('surpriseBtn').addEventListener('click', function() {
-            // Ajouter un message
+            // ---------- Bouton surprise (corrigé) ----------
+            const surpriseBtn = document.getElementById('surpriseBtn');
             const surpriseDiv = document.getElementById('surpriseMessage');
-            surpriseDiv.style.display = 'block';
-            surpriseDiv.innerHTML = '🎉 Je t\'aime plus que tout ! Joyeux anniversaire ma douce <strong>Léa</strong> ! 🎉'; // Change le prénom ici aussi
 
-            // Relancer des confettis
-            initConfetti(200);
+            surpriseBtn.addEventListener('click', function() {
+                // Affiche le message avec les prénoms personnalisés
+                surpriseDiv.style.display = 'block';
+                surpriseDiv.innerHTML = '🎉 Je t\'aime plus que tout, Précieuse ! Joyeux anniversaire de la part de ton Oli 🎉'; // Personnalisé avec Oli
+
+                // Relance une pluie de confettis
+                initConfetti(200);
+            });
         });
     </script>
-    <!-- Petit message pour personnalisation (invisible) -->
-    <!-- N'oublie pas de remplacer Léa par le prénom de ta copine et d'ajuster le message si besoin. -->
 </body>
 </html>
