@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joyeux Anniversaire Précieuse ❤️</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Google Fonts : plus romantique -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* (Styles identiques à avant, mais je les recopie pour que ce soit complet) */
         * {
             margin: 0;
             padding: 0;
@@ -18,8 +17,10 @@
 
         body {
             min-height: 100vh;
-            background: radial-gradient(circle at 30% 30%, #ffe6f0, #ffb6c1);
             font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(-45deg, #ffdde1, #f9c9e2, #f4b8d0, #ffc9de);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -27,6 +28,13 @@
             overflow-x: hidden;
         }
 
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Cœurs flottants */
         .floating-hearts {
             position: absolute;
             top: 0;
@@ -41,7 +49,7 @@
         .heart {
             position: absolute;
             bottom: 0;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 1.5rem;
             animation: floatUp linear infinite;
             user-select: none;
@@ -58,33 +66,49 @@
             }
         }
 
-        .container {
+        /* Pages */
+        .page {
             position: relative;
             z-index: 5;
             width: 90%;
-            max-width: 600px;
-            padding: 2rem;
+            max-width: 700px;
+            transition: opacity 0.8s ease, visibility 0.8s;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .page.hidden {
+            opacity: 0;
+            visibility: hidden;
+            position: absolute;
+            pointer-events: none;
+        }
+
+        /* Cartes */
+        .card {
             background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 40px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.7);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .photo {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             margin: 0 auto 1.5rem;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             border: 4px solid white;
             transition: transform 0.3s ease;
+            overflow: hidden;
         }
 
         .photo:hover {
@@ -97,60 +121,94 @@
             filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
         }
 
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
         h1 {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
             color: #4a2b2b;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
         }
 
-        #name {
-            color: #c44569;
+        h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #4a2b2b;
+            margin-bottom: 1rem;
         }
 
         .message {
             font-size: 1.3rem;
             font-weight: 300;
-            line-height: 1.6;
+            line-height: 1.8;
             color: #3a1f1f;
             background: rgba(255, 255, 255, 0.3);
             padding: 1.5rem;
-            border-radius: 20px;
+            border-radius: 30px;
             margin: 1.5rem 0;
-            box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.5);
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.6);
+        }
+
+        .surprise-message {
+            font-size: 2rem;
+            font-family: 'Great Vibes', cursive;
+            color: #b13e5c;
+            margin: 2rem 0;
         }
 
         button {
             background: #ff4d6d;
             border: none;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            border-radius: 60px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.5);
             transition: all 0.3s ease;
             border: 2px solid white;
             letter-spacing: 1px;
+            margin: 0.5rem;
         }
 
         button:hover {
             background: #ff3355;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(255, 77, 109, 0.7);
         }
 
-        .surprise-message {
-            margin-top: 2rem;
-            font-size: 1.5rem;
-            font-family: 'Dancing Script', cursive;
+        button.secondary {
+            background: rgba(255, 255, 255, 0.4);
             color: #4a2b2b;
+            backdrop-filter: blur(5px);
+            border: 2px solid white;
+        }
+
+        button.secondary:hover {
             background: rgba(255, 255, 255, 0.7);
-            padding: 1rem;
-            border-radius: 40px;
-            display: none;
+        }
+
+        /* Grille de photos pour la page surprise (optionnel) */
+        .photo-grid {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .photo-grid .photo {
+            width: 100px;
+            height: 100px;
+            margin: 0;
+            border: 3px solid white;
         }
 
         #confetti-canvas {
@@ -163,63 +221,92 @@
             z-index: 20;
         }
 
-        @media (max-width: 500px) {
-            .container {
-                padding: 1.5rem;
-            }
-            h1 {
-                font-size: 2.5rem;
-            }
-            .message {
-                font-size: 1.1rem;
-                padding: 1rem;
-            }
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2.5rem; }
+            .card { padding: 1.8rem; }
+            .photo { width: 130px; height: 130px; }
+            .message { font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
+    <!-- Cœurs flottants -->
     <div class="floating-hearts" id="hearts-container"></div>
 
-    <div class="container">
-        <div class="photo">
-            <i class="fas fa-heart"></i> <!-- Tu peux remplacer par une photo <img src="..."> -->
+    <!-- PAGE 1 : ACCUEIL -->
+    <div id="page1" class="page">
+        <div class="card">
+            <div class="photo">
+                <!-- Remplace par une photo : <img src="photo1.jpg" alt="Précieuse"> -->
+                <i class="fas fa-heart"></i>
+            </div>
+            <h1>Joyeux Anniversaire, <span style="color:#c44569;">Précieuse</span> !</h1>
+            <p class="message">
+                Mon amour, aujourd'hui est un jour spécial car c'est le tien. <br>
+                Tu es la plus belle chose qui me soit arrivée. Que cette nouvelle année t'apporte autant de bonheur que tu m'en donnes chaque jour. <br>
+                Je t'aime infiniment, Précieuse. 🌹
+            </p>
+            <button id="toSurpriseBtn">🎁 Voir la surprise</button>
         </div>
-        <h1>Joyeux Anniversaire, <span id="name">Précieuse</span> !</h1>
-        <p class="message">
-            Pour la plus merveilleuse des personnes, je te souhaite une journée remplie de bonheur, d'amour et de surprises. <br>
-            Tu illumines ma vie chaque jour. Je t'aime énormément, Précieuse ! 🌹
-        </p>
-        <button id="surpriseBtn">🎁 Clique pour une surprise</button>
-        <div id="surpriseMessage" class="surprise-message"></div>
     </div>
 
+    <!-- PAGE 2 : SURPRISE -->
+    <div id="page2" class="page hidden">
+        <div class="card">
+            <div class="photo">
+                <!-- Autre photo de vous deux par exemple : <img src="photo2.jpg" alt="Nous"> -->
+                <i class="fas fa-heart"></i>
+            </div>
+            <h2>À ma Précieuse adorée</h2>
+            <div class="surprise-message">
+                💖 Je t'aime plus que tout ! 💖
+            </div>
+            <p class="message" style="font-size: 1.4rem;">
+                Précieuse, chaque instant passé avec toi est un trésor. <br>
+                Merci d'être qui tu es, merci pour ton sourire, ta douceur, ton amour. <br>
+                <strong>Oli</strong>
+            </p>
+            <!-- Mini grille de photos pour ajouter des souvenirs (optionnel) -->
+            <div class="photo-grid">
+                <div class="photo"><i class="fas fa-heart"></i></div>
+                <div class="photo"><i class="fas fa-heart"></i></div>
+                <div class="photo"><i class="fas fa-heart"></i></div>
+            </div>
+            <button class="secondary" id="backBtn">⬅ Retour</button>
+        </div>
+    </div>
+
+    <!-- Canvas pour confettis -->
     <canvas id="confetti-canvas"></canvas>
 
     <script>
-        // Attendre que le DOM soit complètement chargé
         document.addEventListener('DOMContentLoaded', function() {
-            // ---------- Cœurs flottants ----------
+            // ---------- Cœurs flottants (améliorés) ----------
             function createHearts() {
                 const container = document.getElementById('hearts-container');
-                const colors = ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff'];
-                for (let i = 0; i < 25; i++) {
+                const colors = ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#ffc0cb', '#e0bbff'];
+                for (let i = 0; i < 30; i++) {
                     const heart = document.createElement('i');
                     heart.classList.add('heart', 'fas', 'fa-heart');
                     heart.style.left = Math.random() * 100 + '%';
-                    heart.style.animationDuration = Math.random() * 10 + 5 + 's';
-                    heart.style.fontSize = Math.random() * 2 + 0.8 + 'rem';
+                    heart.style.animationDuration = Math.random() * 12 + 6 + 's';
+                    heart.style.fontSize = Math.random() * 2.5 + 0.8 + 'rem';
                     heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    heart.style.animationDelay = Math.random() * 8 + 's';
                     container.appendChild(heart);
                 }
             }
+            createHearts();
 
-            // ---------- Confettis (canvas) ----------
+            // ---------- Confettis (seulement pour page2) ----------
             const canvas = document.getElementById('confetti-canvas');
             const ctx = canvas.getContext('2d');
             let width, height;
             let particles = [];
-            const colorsConfetti = ['#f2d74e', '#95c3fa', '#ff6f91', '#ff4d6d', '#b48cff'];
+            let animationFrame = null;
+            const colorsConfetti = ['#f2d74e', '#95c3fa', '#ff6f91', '#ff4d6d', '#b48cff', '#f9c7c0'];
 
             function resizeCanvas() {
                 width = window.innerWidth;
@@ -234,62 +321,84 @@
                 return {
                     x: Math.random() * width,
                     y: Math.random() * height - height,
-                    size: Math.random() * 8 + 4,
-                    speedY: Math.random() * 3 + 2,
+                    size: Math.random() * 10 + 4,
+                    speedY: Math.random() * 4 + 2,
                     speedX: Math.random() * 2 - 1,
                     color: colorsConfetti[Math.floor(Math.random() * colorsConfetti.length)],
                     rotation: Math.random() * 360
                 };
             }
 
-            function initConfetti(count = 100) {
+            function initConfetti(count = 150) {
                 particles = [];
                 for (let i = 0; i < count; i++) {
                     particles.push(createParticle());
                 }
             }
 
-            function updateConfetti() {
-                ctx.clearRect(0, 0, width, height);
-                for (let i = 0; i < particles.length; i++) {
-                    const p = particles[i];
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate((p.rotation * Math.PI) / 180);
-                    ctx.fillStyle = p.color;
-                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
-                    ctx.restore();
+            function startConfetti() {
+                if (animationFrame) cancelAnimationFrame(animationFrame);
+                function update() {
+                    ctx.clearRect(0, 0, width, height);
+                    for (let i = 0; i < particles.length; i++) {
+                        const p = particles[i];
+                        ctx.save();
+                        ctx.translate(p.x, p.y);
+                        ctx.rotate((p.rotation * Math.PI) / 180);
+                        ctx.fillStyle = p.color;
+                        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                        ctx.restore();
 
-                    p.y += p.speedY;
-                    p.x += p.speedX;
-                    p.rotation += 0.5;
+                        p.y += p.speedY;
+                        p.x += p.speedX;
+                        p.rotation += 0.5;
 
-                    if (p.y > height) {
-                        p.y = -10;
-                        p.x = Math.random() * width;
-                        p.speedY = Math.random() * 3 + 2;
+                        if (p.y > height) {
+                            p.y = -10;
+                            p.x = Math.random() * width;
+                            p.speedY = Math.random() * 4 + 2;
+                        }
                     }
+                    animationFrame = requestAnimationFrame(update);
                 }
-                requestAnimationFrame(updateConfetti);
+                update();
             }
 
-            // Lancement des cœurs et des confettis au chargement
-            createHearts();
-            initConfetti(150);
-            updateConfetti();
+            function stopConfetti() {
+                if (animationFrame) {
+                    cancelAnimationFrame(animationFrame);
+                    animationFrame = null;
+                    ctx.clearRect(0, 0, width, height);
+                }
+            }
 
-            // ---------- Bouton surprise (corrigé) ----------
-            const surpriseBtn = document.getElementById('surpriseBtn');
-            const surpriseDiv = document.getElementById('surpriseMessage');
+            // ---------- Gestion des pages ----------
+            const page1 = document.getElementById('page1');
+            const page2 = document.getElementById('page2');
+            const toSurpriseBtn = document.getElementById('toSurpriseBtn');
+            const backBtn = document.getElementById('backBtn');
 
-            surpriseBtn.addEventListener('click', function() {
-                // Affiche le message avec les prénoms personnalisés
-                surpriseDiv.style.display = 'block';
-                surpriseDiv.innerHTML = '🎉 Je t\'aime plus que tout, Précieuse ! Joyeux anniversaire  🎉'; // Personnalisé avec Oli
+            // Au chargement, on lance des confettis sur page1 ? Non, on les lancera seulement quand page2 est affichée.
+            // Par défaut, page1 visible, page2 cachée.
 
-                // Relance une pluie de confettis
+            toSurpriseBtn.addEventListener('click', function() {
+                // Cacher page1, afficher page2
+                page1.classList.add('hidden');
+                page2.classList.remove('hidden');
+                // Lancer les confettis
                 initConfetti(200);
+                startConfetti();
             });
+
+            backBtn.addEventListener('click', function() {
+                // Cacher page2, afficher page1
+                page2.classList.add('hidden');
+                page1.classList.remove('hidden');
+                // Arrêter les confettis
+                stopConfetti();
+            });
+
+            // Optionnel : si on arrive directement sur page2 via URL, on gère ? Pas nécessaire.
         });
     </script>
 </body>
