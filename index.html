@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joyeux Anniversaire Précieuse ❤️</title>
-    <!-- Google Fonts : plus romantique -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* (Styles inchangés) */
         * {
             margin: 0;
             padding: 0;
@@ -34,7 +35,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Cœurs flottants */
         .floating-hearts {
             position: absolute;
             top: 0;
@@ -66,7 +66,6 @@
             }
         }
 
-        /* Pages */
         .page {
             position: relative;
             z-index: 5;
@@ -84,7 +83,6 @@
             pointer-events: none;
         }
 
-        /* Cartes */
         .card {
             background: rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(15px);
@@ -113,12 +111,6 @@
 
         .photo:hover {
             transform: scale(1.05);
-        }
-
-        .photo i {
-            font-size: 5rem;
-            color: #ff4d6d;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
         }
 
         .photo img {
@@ -195,7 +187,6 @@
             background: rgba(255, 255, 255, 0.7);
         }
 
-        /* Grille de photos pour la page surprise (optionnel) */
         .photo-grid {
             display: flex;
             gap: 1rem;
@@ -221,7 +212,10 @@
             z-index: 20;
         }
 
-        /* Responsive */
+        #bg-music {
+            display: none;
+        }
+
         @media (max-width: 600px) {
             h1 { font-size: 3rem; }
             h2 { font-size: 2.5rem; }
@@ -232,15 +226,20 @@
     </style>
 </head>
 <body>
-    <!-- Cœurs flottants -->
     <div class="floating-hearts" id="hearts-container"></div>
+
+    <!-- Musique de fond (fichier musique.mp3 à la racine) -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="musique.mp3" type="audio/mpeg">
+        Ton navigateur ne supporte pas la musique.
+    </audio>
 
     <!-- PAGE 1 : ACCUEIL -->
     <div id="page1" class="page">
         <div class="card">
             <div class="photo">
-                <!-- Remplace par une photo : <img src="photo1.jpg" alt="Précieuse"> -->
-                <i class="fas fa-heart"></i>
+                <!-- Photo principale page accueil : image1.jpg dans dossier images/ -->
+                <img src="images/image1.jpg" alt="Précieuse">
             </div>
             <h1>Joyeux Anniversaire, <span style="color:#c44569;">Précieuse</span> !</h1>
             <p class="message">
@@ -256,8 +255,8 @@
     <div id="page2" class="page hidden">
         <div class="card">
             <div class="photo">
-                <!-- Autre photo de vous deux par exemple : <img src="photo2.jpg" alt="Nous"> -->
-                <i class="fas fa-heart"></i>
+                <!-- Photo principale page surprise : image5.jpg dans dossier images/ -->
+                <img src="images/image5.jpg" alt="Nous deux">
             </div>
             <h2>À ma Précieuse adorée</h2>
             <div class="surprise-message">
@@ -268,22 +267,21 @@
                 Merci d'être qui tu es, merci pour ton sourire, ta douceur, ton amour. <br>
                 <strong>Oli</strong>
             </p>
-            <!-- Mini grille de photos pour ajouter des souvenirs (optionnel) -->
+            <!-- Grille de 3 photos : image2.jpg, image3.jpg, image4.jpg dans dossier images/ -->
             <div class="photo-grid">
-                <div class="photo"><i class="fas fa-heart"></i></div>
-                <div class="photo"><i class="fas fa-heart"></i></div>
-                <div class="photo"><i class="fas fa-heart"></i></div>
+                <div class="photo"><img src="images/image2.jpg" alt="Souvenir 1"></div>
+                <div class="photo"><img src="images/image3.jpg" alt="Souvenir 2"></div>
+                <div class="photo"><img src="images/image4.jpg" alt="Souvenir 3"></div>
             </div>
             <button class="secondary" id="backBtn">⬅ Retour</button>
         </div>
     </div>
 
-    <!-- Canvas pour confettis -->
     <canvas id="confetti-canvas"></canvas>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ---------- Cœurs flottants (améliorés) ----------
+            // ---------- Cœurs flottants ----------
             function createHearts() {
                 const container = document.getElementById('hearts-container');
                 const colors = ['#ffb3ba', '#ffdfba', '#ffffba', '#baffc9', '#bae1ff', '#ffc0cb', '#e0bbff'];
@@ -300,7 +298,7 @@
             }
             createHearts();
 
-            // ---------- Confettis (seulement pour page2) ----------
+            // ---------- Confettis ----------
             const canvas = document.getElementById('confetti-canvas');
             const ctx = canvas.getContext('2d');
             let width, height;
@@ -372,33 +370,29 @@
                 }
             }
 
-            // ---------- Gestion des pages ----------
+            // ---------- Gestion des pages et musique ----------
             const page1 = document.getElementById('page1');
             const page2 = document.getElementById('page2');
             const toSurpriseBtn = document.getElementById('toSurpriseBtn');
             const backBtn = document.getElementById('backBtn');
-
-            // Au chargement, on lance des confettis sur page1 ? Non, on les lancera seulement quand page2 est affichée.
-            // Par défaut, page1 visible, page2 cachée.
+            const music = document.getElementById('bg-music');
+            music.volume = 0.4;
 
             toSurpriseBtn.addEventListener('click', function() {
-                // Cacher page1, afficher page2
                 page1.classList.add('hidden');
                 page2.classList.remove('hidden');
-                // Lancer les confettis
                 initConfetti(200);
                 startConfetti();
+                music.play().catch(e => console.log("Musique bloquée :", e));
             });
 
             backBtn.addEventListener('click', function() {
-                // Cacher page2, afficher page1
                 page2.classList.add('hidden');
                 page1.classList.remove('hidden');
-                // Arrêter les confettis
                 stopConfetti();
+                music.pause();
+                music.currentTime = 0;
             });
-
-            // Optionnel : si on arrive directement sur page2 via URL, on gère ? Pas nécessaire.
         });
     </script>
 </body>
